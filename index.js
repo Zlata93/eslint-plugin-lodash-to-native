@@ -2,9 +2,9 @@
 
 module.exports = {
     rules: {
-        'map': require('./lib/rules/map'),
+        'map': require('./lib/rules/map')
     },
-    // rulesConfig: {
-    //     'array-bracket-spacing': 0,
-    // },
+    rulesConfig: {
+        'map': 0
+    },
 };

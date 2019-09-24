@@ -9,6 +9,7 @@
   "author": "Zlata Kotlova",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^6.4.0"
+    "eslint": "^6.4.0",
+    "mocha": "^6.2.0"
   }
 }

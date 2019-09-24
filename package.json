@@ -1,10 +1,14 @@
 {
   "name": "eslint-plugin-lodash-to-native",
   "version": "1.0.0",
-  "description": "",
+  "description": "eslint plugin to replace lodash _.map method with native map method where possible",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zlata93/eslint-plugin-lodash-to-native"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/lib/rules/map.js"
   },
   "author": "Zlata Kotlova",
   "license": "ISC",

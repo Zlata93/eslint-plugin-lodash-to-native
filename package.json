@@ -1,5 +1,5 @@
 {
-  "name": "eslint-plugin-lodash-to-native",
+  "name": "lodash-to-native",
   "version": "1.0.0",
   "description": "eslint plugin to replace lodash _.map method with native map method where possible",
   "main": "index.js",

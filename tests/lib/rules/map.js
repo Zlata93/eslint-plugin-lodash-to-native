@@ -17,6 +17,15 @@ ruleTester.run('map', rule, {
                 }
             ],
             output: '[4, 8].map(function(n) { return n*n; });'
+        },
+        {
+            code: 'var arr = [1,2,3]; _.map(arr, function(n) { return n*n; });',
+            errors: [
+                {
+                    messageId: 'map'
+                }
+            ],
+            output: 'var arr = [1,2,3]; arr.map(function(n) { return n*n; });'
         }
     ]
 });

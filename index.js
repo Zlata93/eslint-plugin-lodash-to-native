@@ -4,7 +4,7 @@ module.exports = {
     rules: {
         'map': require('./lib/rules/map')
     },
-    rulesConfig: {
-        'map': 0
-    },
+    // rulesConfig: {
+    //     'map': 0
+    // },
 };

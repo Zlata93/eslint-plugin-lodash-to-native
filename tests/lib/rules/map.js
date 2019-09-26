@@ -7,15 +7,14 @@ ruleTester.run('map', rule, {
     valid: [
         '_.map({ \'a\': 4, \'b\': 8 }, function(n) { return n*n; });',
         '[1,2,3].map(function(n) { return n*n; });',
-        'var obj = { \'a\': 4, \'b\': 8 }; _.map(obj, function(n) { return n*n; });',
-        'function getObj() { return { \'a\': 4, \'b\': 8 } } _.map(getObj(), function(n) { return n*n; });'
+        'var obj = { \'a\': 4, \'b\': 8 }; _.map(obj, function(n) { return n*n; });'
     ],
     invalid: [
         {
             code: '_.map([4, 8], function(n) { return n*n; });',
             errors: [
                 {
-                    messageId: 'map'
+                    messageId: 'lodashMapToNative'
                 }
             ],
             output: '[4, 8].map(function(n) { return n*n; });'
@@ -24,19 +23,30 @@ ruleTester.run('map', rule, {
             code: 'var arr = [1,2,3]; _.map(arr, function(n) { return n*n; });',
             errors: [
                 {
-                    messageId: 'map'
+                    messageId: 'lodashMapToNative'
                 }
             ],
             output: 'var arr = [1,2,3]; arr.map(function(n) { return n*n; });'
         },
         {
-            code: 'function getArr() { return [1,2,3] } _.map(getArr(), function(n) { return n*n; });',
+            code: 'function getArr() { return [1,2,3]; } _.map(getArr(), function(n) { return n*n; });',
             errors: [
                 {
-                    messageId: 'map'
+                    messageId: 'lodashMapToNative'
                 }
             ],
-            output: 'function getArr() { return [1,2,3] } getArr().map(function(n) { return n*n; });'
+            output:
+                `function getArr() { return [1,2,3]; } \nvar getArrResult = getArr();\nArray.isArray(getArrResult) ? getArrResult.map(function(n) { return n*n; }) : _.map(getArrResult, function(n) { return n*n; });`
+        },
+        {
+            code: 'function getObj() { return { \'a\': 4, \'b\': 8 }; } _.map(getObj(), function(n) { return n*n; });',
+            errors: [
+                {
+                    messageId: 'lodashMapToNative'
+                }
+            ],
+            output:
+                `function getObj() { return { \'a\': 4, \'b\': 8 }; } \nvar getObjResult = getObj();\nArray.isArray(getObjResult) ? getObjResult.map(function(n) { return n*n; }) : _.map(getObjResult, function(n) { return n*n; });`
         }
     ]
 });

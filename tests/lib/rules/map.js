@@ -9,7 +9,8 @@ ruleTester.run('map', rule, {
         '_.map(1+2, function(n) { return n*n; });',
         '[1,2,3].map(function(n) { return n*n; });',
         'var obj = { "a": 4, "b": 8 }; _.map(obj, function(n) { return n*n; });',
-        'var arr = [1,2,3]; arr.map(function(n) { return n*n; });'
+        'var arr = [1,2,3]; arr.map(function(n) { return n*n; });',
+        'var _ = {}; _.map([4, 8], function(n) { return n*n; });'
     ],
     invalid: [
         {
@@ -89,5 +90,14 @@ ruleTester.run('map', rule, {
             ],
             output: 'var res = {} || []; Array.isArray(res) ? res.map(function(n) { return n*n; }) : _.map(res, function(n) { return n*n; });'
         },
+        {
+            code: '_.map([4, 8], function(n) { return n*n; }); var _ = {}; _.map([4, 8], function(n) { return n*n; });',
+            errors: [
+                {
+                    messageId: 'lodashMapToNative'
+                }
+            ],
+            output: '[4, 8].map(function(n) { return n*n; }); var _ = {}; _.map([4, 8], function(n) { return n*n; });'
+        }
     ]
 });

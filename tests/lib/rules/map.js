@@ -31,26 +31,26 @@ ruleTester.run('map', rule, {
             ],
             output: 'var arr = [1,2,3]; arr.map(function(n) { return n*n; });'
         },
-        // {
-        //     code: 'function getArr() { return [1,2,3]; } _.map(getArr(), function(n) { return n*n; });',
-        //     errors: [
-        //         {
-        //             messageId: 'lodashMapToNative'
-        //         }
-        //     ],
-        //     output:
-        //         `function getArr() { return [1,2,3]; } \nvar getArrResult = getArr();\nArray.isArray(getArrResult) ? getArrResult.map(function(n) { return n*n; }) : _.map(getArrResult, function(n) { return n*n; });`
-        // },
-        // {
-        //     code: 'function getObj() { return { "a": 4, "b": 8 }; } _.map(getObj(), function(n) { return n*n; });',
-        //     errors: [
-        //         {
-        //             messageId: 'lodashMapToNative'
-        //         }
-        //     ],
-        //     output:
-        //         `function getObj() { return { "a": 4, "b": 8 }; } \nvar getObjResult = getObj();\nArray.isArray(getObjResult) ? getObjResult.map(function(n) { return n*n; }) : _.map(getObjResult, function(n) { return n*n; });`
-        // },
+        {
+            code: 'function getArr() { return [1,2,3]; } _.map(getArr(), function(n) { return n*n; });',
+            errors: [
+                {
+                    messageId: 'lodashMapToNative'
+                }
+            ],
+            output:
+                `function getArr() { return [1,2,3]; } \nvar getArrResult = getArr();\nArray.isArray(getArrResult) ? getArrResult.map(function(n) { return n*n; }) : _.map(getArrResult, function(n) { return n*n; });`
+        },
+        {
+            code: 'function getObj() { return { "a": 4, "b": 8 }; } _.map(getObj(), function(n) { return n*n; });',
+            errors: [
+                {
+                    messageId: 'lodashMapToNative'
+                }
+            ],
+            output:
+                `function getObj() { return { "a": 4, "b": 8 }; } \nvar getObjResult = getObj();\nArray.isArray(getObjResult) ? getObjResult.map(function(n) { return n*n; }) : _.map(getObjResult, function(n) { return n*n; });`
+        },
         {
             code: 'function getArr() { return [1,2,3]; } var res = _.map(getArr(), function(n) { return n*n; });',
             errors: [
